@@ -11,11 +11,12 @@
     
     <style>
         :root {
-            --bg-color: #FFEAF4;
-            --light-pink: #FFD6E8;
-            --rose-pink: #FFB6C1;
-            --dark-pink: #FF69B4;
-            --washi-tape: rgba(255, 182, 193, 0.7);
+            --bg-color: #FFF0F5; /* Lavender Blush / Soft Cozy Pink */
+            --light-pink: #FFE5EC;
+            --rose-pink: #FFC2D1;
+            --dark-pink: #FF85A2;
+            --accent-red: #FF4D6D;
+            --washi-tape: rgba(255, 194, 209, 0.7);
         }
 
         * {
@@ -26,7 +27,7 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: radial-gradient(rgba(255, 182, 193, 0.4) 8%, transparent 8%);
+            background-image: radial-gradient(rgba(255, 133, 162, 0.2) 8%, transparent 8%);
             background-size: 24px 24px;
             font-family: 'Poppins', sans-serif;
             overflow: hidden; 
@@ -44,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #FFEAF4 0%, #FFD6E8 100%);
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE5EC 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -68,7 +69,7 @@
         .gift-box {
             font-size: 120px;
             line-height: 1;
-            filter: drop-shadow(0 10px 15px rgba(255, 105, 180, 0.3));
+            filter: drop-shadow(0 10px 15px rgba(255, 133, 162, 0.3));
         }
 
         .gift-text {
@@ -89,7 +90,7 @@
             background: var(--dark-pink);
             border: none;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 133, 162, 0.4);
             cursor: pointer;
         }
 
@@ -266,7 +267,6 @@
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
-        /* Simple Gray Style para sa No Button */
         #btn-no {
             background: #f1f1f1;
             color: #666;
@@ -274,108 +274,204 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        /* --- ENVELOPE & LETTER --- */
+        /* --- AESTHETIC CUTE ENVELOPE DESIGN --- */
         .envelope-container {
-            max-width: 400px;
-            margin: 80px auto 0 auto;
+            width: 380px;
+            height: 240px;
+            margin: 40px auto 0 auto;
             position: relative;
+            perspective: 1200px; 
         }
 
+        /* Paper Airplane Flight Path */
+        .paper-airplane {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            left: -150px;
+            top: 50%;
+            transform: translateY(-50%) rotate(15deg);
+        }
+
+        .stage-element#stage-letter.active .paper-airplane {
+            animation: flyPlane 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .stage-element#stage-letter.active .envelope-container {
+            animation: flyEnvelopeFromLeft 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Main envelope body with aesthetic soft pink shadows */
         .envelope {
             position: relative;
             width: 100%;
-            height: 260px;
-            background: var(--light-pink);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            cursor: pointer;
+            height: 100%;
+            background: var(--light-pink); 
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
             transform-style: preserve-3d;
         }
 
-        /* Likod na bahagi ng sobre */
-        .envelope::before {
-            content: "";
+        /* Inner lining (Aesthetic polka-dot pattern in the pocket) */
+        .envelope-back {
             position: absolute;
-            top: 0;
-            z-index: 10;
-            border-left: 180px solid transparent;
-            border-right: 180px solid transparent;
-            border-bottom: 130px solid var(--rose-pink);
-            width: 0;
-            height: 0;
-            border-radius: 0 0 10px 10px;
+            width: 100%;
+            height: 100%;
+            background-color: #FFF0F3;
+            background-image: radial-gradient(var(--rose-pink) 15%, transparent 15%);
+            background-size: 14px 14px;
+            border-radius: 12px;
+            border: 3px solid white;
+            z-index: 1;
         }
 
-        /* Gilid na tiklop ng sobre */
-        .envelope::after {
-            content: "";
+        /* Left/Right Pastel Folds */
+        .envelope-left {
             position: absolute;
-            top: 0;
-            z-index: 9;
-            border-left: 130px solid rgba(255, 214, 232, 0.9);
-            border-right: 130px solid rgba(255, 214, 232, 0.9);
-            border-top: 130px solid transparent;
-            border-bottom: 130px solid rgba(255, 214, 232, 0.9);
             width: 0;
             height: 0;
-            border-radius: 0 0 10px 10px;
+            border-left: 190px solid #FFE5EC; 
+            border-top: 120px solid transparent;
+            border-bottom: 120px solid transparent;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            filter: drop-shadow(-2px 0 2px rgba(255, 182, 193, 0.2));
         }
 
-        /* Ang flap sa itaas ng sobre */
+        .envelope-right {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-right: 190px solid #FFE5EC;
+            border-top: 120px solid transparent;
+            border-bottom: 120px solid transparent;
+            right: 0;
+            top: 0;
+            z-index: 3;
+            filter: drop-shadow(2px 0 2px rgba(255, 182, 193, 0.2));
+        }
+
+        /* Bottom flap folding up (slightly darker aesthetic pink) */
+        .envelope-bottom {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-bottom: 130px solid #FFCAD4; 
+            border-left: 190px solid transparent;
+            border-right: 190px solid transparent;
+            bottom: 0;
+            left: 0;
+            z-index: 4;
+            filter: drop-shadow(0 -3px 4px rgba(255, 182, 193, 0.3));
+        }
+
+        /* Top flap with delicate round finish look */
         .flap {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 0;
             height: 0;
-            border-left: 180px solid transparent;
-            border-right: 180px solid transparent;
-            border-top: 130px solid var(--dark-pink);
+            border-top: 130px solid #FFB3C1; 
+            border-left: 190px solid transparent;
+            border-right: 190px solid transparent;
+            top: 0;
+            left: 0;
             transform-origin: top;
-            transition: transform 0.5s ease, z-index 0.2s;
-            z-index: 11;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5; 
+            filter: drop-shadow(0 4px 5px rgba(255, 133, 162, 0.2));
         }
 
+        /* Opened Envelope State */
         .envelope.open .flap {
             transform: rotateX(180deg);
-            z-index: 5;
+            z-index: 2; 
         }
 
-        /* Ang Sulat sa Loob */
+        /* --- AESTHETIC CUTE WAX SEAL STICKER --- */
+        .cute-seal {
+            position: absolute;
+            top: 100px; /* Aligned perfectly at the tip of the triangular flap */
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            width: 54px;
+            height: 54px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            z-index: 10;
+            cursor: pointer;
+            pointer-events: none; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 6px 12px rgba(255, 77, 109, 0.4), inset 0 -3px 6px rgba(0,0,0,0.15);
+            border: 3px dashed #FFF; /* Aesthetic dashed borders */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Pulsing hint to make user notice */
+        .cute-seal.active {
+            pointer-events: auto;
+            animation: sealPulse 1.5s infinite ease-in-out;
+        }
+
+        .envelope.open .cute-seal {
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- LETTER CARD (Inside Envelope) --- */
         .letter-card {
             position: absolute;
-            top: 10px;
-            left: 15px;
-            right: 15px;
-            background: white;
+            background: #FFFDF9; /* Warm cream paper */
+            border: 2px dashed var(--rose-pink);
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            z-index: 8;
-            transition: transform 0.6s ease;
-            max-height: 230px;
+            left: 15px;
+            right: 15px;
+            top: 10px;
+            height: 220px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            z-index: 2; 
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
+        }
+
+        /* Decorative lace pattern inside the letter background */
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid rgba(255, 133, 162, 0.15);
+            border-radius: 6px;
+            pointer-events: none;
         }
 
         .envelope.open .letter-card {
             transform: translateY(-160px);
-            z-index: 20;
-            max-height: 340px;
-            height: 320px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 20; 
+            height: 340px;
+            box-shadow: 0 15px 30px rgba(255, 133, 162, 0.25);
         }
 
         .letter-card h3 {
             font-family: 'Pacifico', cursive;
             color: var(--dark-pink);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+            text-align: center;
         }
 
         .letter-card p {
             font-size: 0.9rem;
-            line-height: 1.5;
-            color: #444;
+            line-height: 1.6;
+            color: #4A4A4A;
             white-space: pre-line;
             text-align: left;
         }
@@ -383,23 +479,36 @@
         .click-hint {
             color: var(--dark-pink);
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 10px;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
             animation: pulse 1.5s infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        /* Next to Cake Button sa sulat */
+        .click-hint.visible {
+            opacity: 1;
+        }
+
+        /* Next to Cake Button inside letter */
         .finish-letter-btn {
             display: none;
-            margin: 15px auto 0 auto;
-            padding: 6px 20px;
+            margin: 18px auto 0 auto;
+            padding: 8px 25px;
             background: var(--dark-pink);
             color: white;
             border: none;
             border-radius: 20px;
             font-family: 'Poppins', sans-serif;
             font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 133, 162, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .finish-letter-btn:hover {
+            transform: scale(1.05);
         }
 
         /* --- CAKE SCREEN --- */
@@ -462,12 +571,72 @@
         @keyframes moveCloud { 0% { transform: translateX(-150px); } 100% { transform: translateX(calc(100vw + 150px)); } }
         @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
+        /* KEYFRAMES FOR TRANSITION (LEFT TO CENTER LANDING) */
+        @keyframes flyPlane {
+            0% {
+                left: -150px;
+                top: 70%;
+                transform: translateY(-50%) rotate(15deg) scale(0.6);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            70% {
+                left: 42%;
+                top: 40%;
+                transform: translateY(-50%) rotate(5deg) scale(1.1);
+                opacity: 1;
+            }
+            85% {
+                left: 55%;
+                top: 45%;
+                transform: translateY(-50%) rotate(-10deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                left: 110%;
+                top: 30%;
+                transform: translateY(-50%) rotate(-25deg) scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flyEnvelopeFromLeft {
+            0% {
+                transform: translateX(-120vw) rotate(-25deg) scale(0.4);
+                opacity: 0;
+            }
+            65% {
+                transform: translateX(30px) rotate(5deg) scale(1.05);
+                opacity: 1;
+            }
+            80% {
+                transform: translateX(-10px) rotate(-2deg) scale(0.98);
+            }
+            100% {
+                transform: translateX(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Cute Sticker/Seal Pulse */
+        @keyframes sealPulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.15); filter: drop-shadow(0 8px 16px rgba(255, 77, 109, 0.6)); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
         /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 420px) {
             .slide-card img, .slide-card video { height: 260px; }
             .stage { height: 420px; }
-            .envelope::before, .flap { border-left-width: 42vw; border-right-width: 42vw; }
-            .envelope::after { border-left-width: 30vw; border-right-width: 30vw; }
+            .envelope-container { width: 320px; height: 200px; }
+            .envelope-left { border-left-width: 160px; border-top-width: 100px; border-bottom-width: 100px; }
+            .envelope-right { border-right-width: 160px; border-top-width: 100px; border-bottom-width: 100px; }
+            .envelope-bottom { border-bottom-width: 110px; border-left-width: 160px; border-right-width: 160px; }
+            .flap { border-top-width: 110px; border-left-width: 160px; border-right-width: 160px; }
+            .cute-seal { top: 80px; width: 46px; height: 46px; font-size: 18px; }
         }
     </style>
 </head>
@@ -535,8 +704,7 @@
                         <div class="caption">ging mingaw nako niyaa ettt😭😭😭</div>
                     </div>
                    
-            
-                    <!-- Photo 3 (VIDEO INTEGRATION - bi7.mp4) -> MUTED AT PLAYSINLINE PARA SA MOBILE -->
+                    <!-- Photo 3 (VIDEO INTEGRATION - bi7.mp4) -->
                     <div class="slide-card item" style="display:none;">
                         <div class="washi-tape-top" style="background-color: rgba(255, 214, 232, 0.8);"></div>
                         <div class="sticker s-sparkle">✨</div>
@@ -546,7 +714,7 @@
                         </video>
                         <div class="caption">sorrr proudd of youuu 🥰</div>
                     </div>
-                    <!-- Photo 4 (VIDEO INTEGRATION - bi8.mp4) -> MUTED AT PLAYSINLINE PARA SA MOBILE -->
+                    <!-- Photo 4 (VIDEO INTEGRATION - bi8.mp4) -->
                     <div class="slide-card item" style="display:none;">
                         <div class="washi-tape-top" style="background-color: rgba(255, 214, 232, 0.8);"></div>
                         <div class="sticker s-sparkle">✨</div>
@@ -565,32 +733,48 @@
                 </div>
             </div>
 
-            <!-- STAGE 2: THE FIXED NO & YES BOX (KALIWA ANG NO, KANAN ANG YES) -->
+            <!-- STAGE 2: THE FIXED NO & YES BOX -->
             <div id="stage-decision" class="stage-element">
                 <div class="decision-box">
                     <h3 class="decision-title">Naa siyay feelings nako??</h3>
                     <div class="btn-group">
-
                         <!-- YES BUTTON -->
                         <button class="choice-btn" id="btn-yes-1" onclick="goToLetter()">Yes! 💖</button>
                         <!-- NO BUTTON -->
                         <button class="choice-btn" id="btn-no" onclick="refuseNo()">No 💔</button>
-                        <!-- YES BUTTON -->
                     </div>
                 </div>
             </div>
 
             <!-- STAGE 3: THE ENVELOPE & LETTER -->
             <div id="stage-letter" class="stage-element">
-                <p class="click-hint">👇 I click ettttt! 👇</p>
+                <!-- Cute SVG Paper Airplane -->
+                <svg class="paper-airplane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 3L3 10.5L9.75 13.5M21 3L13.5 21L11.25 15M21 3L11.25 15M11.25 15L9.75 13.5M9.75 13.5L3 10.5" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <p class="click-hint" id="envelope-hint">👇 Tap the heart sticker to open! 👇</p>
                 <div class="envelope-container">
-                    <div class="envelope" id="birthday-envelope" onclick="toggleEnvelope()">
-                        <div class="flap"></div>
+                    <!-- The Aesthetic Envelope -->
+                    <div class="envelope" id="birthday-envelope">
+                        <!-- Cute Wax Seal Sticker / Button Lock -->
+                        <div class="cute-seal" id="envelope-lock" onclick="toggleEnvelope()">💖</div>
+                        
+                        <!-- Polka Dot Inner Lining / Back Fold -->
+                        <div class="envelope-back"></div>
+                        
+                        <!-- The letter card hiding inside -->
                         <div class="letter-card">
                             <h3>To My Constant, 💌</h3>
                             <p id="typewriter-text"></p>
                             <button class="finish-letter-btn" id="done-btn" onclick="goToCake(event)">Blow Cake! 🎂</button>
                         </div>
+
+                        <!-- 3D Overlapping flaps -->
+                        <div class="envelope-left"></div>
+                        <div class="envelope-right"></div>
+                        <div class="envelope-bottom"></div>
+                        <div class="flap"></div>
                     </div>
                 </div>
             </div>
@@ -607,7 +791,6 @@
     </div>
 
     <script>
-        // Ang iyong liham
         const letterMessage = `Hii dae, it’s me again—ang gwapa HAHAHAHAHA!\n
 Happy birthday, daeee! You’re not a teenager anymore nah HAHAHAHAHAHA.\n
 I just wanted to say thank you.\nThank you for the unlimited chikas, and thank you for understanding me through everything in life HAHAHAHAHAHA.\n
@@ -624,26 +807,19 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
         const bgMusic = document.getElementById('bg-music');
         const bdayVideos = document.querySelectorAll('.bday-vids');
 
-        // Unang slide lang ang ipakita sa simula
         slideItems.forEach((slide, idx) => {
             slide.style.display = idx === 0 ? 'flex' : 'none';
         });
 
-        // PAG-CLICK PALANG NG SURPRISE GIFT -> TUTUGTOG NA AGAD ANG MUSIC
         function openSurprise() {
             document.getElementById('gift-overlay').classList.add('hidden');
             document.getElementById('main-content').classList.add('visible');
-            
-            // Simulan agad ang tugtog
             bgMusic.play().catch(e => console.log("Audio play delayed:", e));
-            
             triggerCelebration();
             startEnviroEffects();
         }
 
-        // Slideshow Navigation
         function changeSlide(direction) {
-            // I-pause muna ang lahat ng video kung lilipat ng slide
             bdayVideos.forEach(vid => {
                 if (!vid.paused) {
                     vid.pause();
@@ -654,16 +830,14 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             currentSlide = (currentSlide + direction + slideItems.length) % slideItems.length;
             slideItems[currentSlide].style.display = 'flex';
 
-            // AUTOMATIC PLAY: Kung ang bagong slide ay may video, i-play ito agad ng kusa
             const currentCard = slideItems[currentSlide];
             const currentVid = currentCard.querySelector('.bday-vids');
             if (currentVid) {
                 setTimeout(() => {
                     currentVid.play().catch(e => console.log("Autoplay prevented by browser: ", e));
-                }, 300); // 300ms transition delay
+                }, 300);
             }
 
-            // Lilipat sa Decision Stage kapag natapos ang huling slide
             if (currentSlide === slideItems.length - 1 && direction === 1) {
                 setTimeout(() => {
                     switchStage('stage-slideshow', 'stage-decision');
@@ -671,37 +845,45 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             }
         }
 
-        // Popup message kapag kinlik ang No
         function refuseNo() {
             alert("🚫Di Pwede.");
         }
 
-        // Lipat stage
         function switchStage(fromId, toId) {
             document.getElementById(fromId).classList.remove('active');
             document.getElementById(toId).classList.add('active');
         }
 
-        // Kapag pinindot ang YES -> Lipat sa Envelope Stage
         function goToLetter() {
             switchStage('stage-decision', 'stage-letter');
             bgMusic.play().catch(e => console.log("Audio play delayed: ", e));
             triggerCelebration();
+
+            const lock = document.getElementById('envelope-lock');
+            const hint = document.getElementById('envelope-hint');
+            
+            lock.classList.remove('active');
+            hint.classList.remove('visible');
+
+            setTimeout(() => {
+                lock.classList.add('active'); 
+                hint.classList.add('visible');   
+            }, 3000);
         }
 
-        // Buksan ang sobre at simulan ang typewriter
         function toggleEnvelope() {
             const envelope = document.getElementById('birthday-envelope');
-            if(!envelope.classList.contains('open')) {
+            const lock = document.getElementById('envelope-lock');
+
+            if(lock.classList.contains('active') && !envelope.classList.contains('open')) {
                 envelope.classList.add('open');
                 if(!typewriterStarted) {
                     typewriterStarted = true;
-                    setTimeout(startTypewriter, 600);
+                    setTimeout(startTypewriter, 1000); 
                 }
             }
         }
 
-        // Typewriter Effect para sa sulat
         let textIndex = 0;
         function startTypewriter() {
             if (textIndex < letterMessage.length) {
@@ -713,15 +895,13 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             }
         }
 
-        // Lipat papunta sa dulo (Cake Stage)
         function goToCake(event) {
-            event.stopPropagation(); // Pinipigilan ang envelope na mag-close ulit
+            event.stopPropagation();
             document.getElementById('stage-letter').classList.remove('active');
             document.getElementById('stage-cake').classList.add('active');
             triggerCelebration();
         }
 
-        // Confetti at Fireworks
         function triggerCelebration() {
             confetti({ particleCount: 140, spread: 70, origin: { y: 0.6 } });
             setTimeout(() => confetti({ particleCount: 80, angle: 60, spread: 55, origin: { x: 0, y: 0.7 } }), 200);
@@ -732,7 +912,6 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
         }
 
-        // Sakura at Animal Animations sa Background
         function startEnviroEffects() {
             setInterval(() => {
                 const sakura = document.createElement('div');
