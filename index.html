@@ -236,6 +236,8 @@
             border: 3px dashed var(--rose-pink);
             max-width: 400px;
             margin: 0 auto;
+            position: relative;
+            overflow: visible;
         }
 
         .decision-title {
@@ -252,6 +254,7 @@
             align-items: center;
             gap: 20px;
             height: 80px;
+            position: relative;
         }
 
         .choice-btn {
@@ -272,6 +275,8 @@
             color: #666;
             border: 1px solid #ccc;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 15;
         }
 
         /* --- AESTHETIC ENVELOPE DESIGN --- */
@@ -522,8 +527,9 @@
         .cake-text {
             font-family: 'Pacifico', cursive;
             color: var(--dark-pink);
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding: 0 10px;
         }
 
         .cake-wrapper {
@@ -540,10 +546,10 @@
 
         /* Real-looking Plate */
         .plate {
-            width: 260px;
+            width: 270px;
             height: 14px;
             background: #f0f0f0;
-            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
+            background: linear-gradient(to bottom, #ffffff 0%, #d4d4d4 100%);
             border-radius: 50%;
             position: absolute;
             bottom: 10px;
@@ -554,11 +560,11 @@
         /* 3D Cake Body */
         .cake-body {
             position: relative;
-            width: 200px;
-            height: 120px;
-            background: #6f4e37; /* Chocolate flavor base */
+            width: 210px;
+            height: 130px;
+            background: #5c3a21; /* Rich Dark Chocolate flavor base */
             border-radius: 100px / 40px; /* 3D Cylindrical top curve */
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
             z-index: 2;
             margin-bottom: 10px;
             overflow: visible;
@@ -569,8 +575,8 @@
             position: absolute;
             top: 0;
             width: 100%;
-            height: 40px;
-            background: #8b5a2b; /* Strawberry-chocolate mixture */
+            height: 42px;
+            background: #4a2e1b; /* Outer Top Surface */
             border-radius: 50%;
             z-index: 3;
             box-shadow: inset 0 2px 5px rgba(255,255,255,0.2);
@@ -579,13 +585,29 @@
         /* Cream Frosting details dripping down */
         .cream-frosting {
             position: absolute;
-            top: 15px;
+            top: 10px;
             width: 100%;
             height: 35px;
-            background: #fff0f3; /* Rich vanilla icing */
+            background: #fff0f3; /* White Vanilla Cream top */
             border-radius: 50%;
             z-index: 4;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: inset 0 -3px 6px rgba(0,0,0,0.05);
+        }
+
+        /* NEW ADDITION: CHOCOLATE STICKS/SHAVINGS ON THE SIDES (KILID) */
+        .cake-sides-chocolate {
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            height: 85px;
+            z-index: 3;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(90deg, transparent 0px, transparent 4px, #3d2515 4px, #26160c 8px),
+                linear-gradient(90deg, transparent 2px, transparent 6px, #422817 6px, #301c10 10px);
+            background-size: 16px 100%, 22px 90%;
+            opacity: 0.95;
+            border-radius: 0 0 100px 100px / 0 0 40px 40px;
         }
 
         /* Icing Drips */
@@ -596,39 +618,85 @@
             height: 24px;
             border-radius: 0 0 10px 10px;
             z-index: 4;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
         }
-        .drip-1 { left: 25px; top: 22px; height: 18px; }
-        .drip-2 { left: 55px; top: 24px; height: 26px; }
-        .drip-3 { left: 95px; top: 25px; height: 15px; }
-        .drip-4 { left: 135px; top: 23px; height: 28px; }
-        .drip-5 { left: 165px; top: 20px; height: 16px; }
+        .drip-1 { left: 25px; top: 18px; height: 18px; }
+        .drip-2 { left: 55px; top: 20px; height: 26px; }
+        .drip-3 { left: 95px; top: 21px; height: 15px; }
+        .drip-4 { left: 135px; top: 19px; height: 28px; }
+        .drip-5 { left: 175px; top: 16px; height: 20px; }
 
-        /* Colorful Sprinkles */
-        .sprinkles {
+        /* REALISTIC ABUNDANT FRUIT TOPPINGS LAYER (PUNONG-PUNO) */
+        .fruits-layer {
             position: absolute;
             width: 100%;
-            height: 40px;
-            top: 5px;
+            height: 50px;
+            top: -5px;
             z-index: 5;
             pointer-events: none;
         }
-        .sprinkle {
-            position: absolute;
-            width: 4px;
-            height: 10px;
-            border-radius: 2px;
-            transform: rotate(25deg);
-        }
-        .sp-1 { background: #ff4d6d; top: 10px; left: 40px; transform: rotate(15deg); }
-        .sp-2 { background: #ffbe0b; top: 18px; left: 80px; transform: rotate(-45deg); }
-        .sp-3 { background: #3a86c8; top: 8px; left: 120px; transform: rotate(30deg); }
-        .sp-4 { background: #8338ec; top: 15px; left: 150px; transform: rotate(-10deg); }
-        .sp-5 { background: #38b000; top: 12px; left: 95px; transform: rotate(60deg); }
 
-        /* Realistic Candle (Wax + Stripe pattern) */
+        /* 3D Cherries */
+        .cherry-fruit {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: radial-gradient(circle at 35% 35%, #ff6b8b 0%, #d90429 40%, #7a0010 100%);
+            border-radius: 50%;
+            filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
+        }
+        .cherry-fruit::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 14px;
+            border-left: 1.5px solid #3d4f41;
+            border-radius: 50% 0 0 0;
+            top: -11px;
+            left: 8px;
+            transform: rotate(15deg);
+        }
+        .ch-1 { top: 10px; left: 30px; }
+        .ch-2 { top: 18px; left: 155px; transform: scale(0.95); }
+        .ch-3 { top: 22px; left: 85px; transform: scale(1.05); z-index: 6; }
+        .ch-4 { top: 8px; left: 110px; }
+        .ch-5 { top: 25px; left: 45px; transform: scale(0.9); }
+
+        /* 3D Grapes */
+        .grape-fruit {
+            position: absolute;
+            width: 16px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #b8c0ff 0%, #7209b7 50%, #3f37c9 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+        }
+        .gr-1 { top: 8px; left: 60px; transform: rotate(15deg); }
+        .gr-2 { top: 15px; left: 72px; transform: rotate(-20deg) scale(0.95); }
+        .gr-3 { top: 6px; left: 130px; transform: rotate(5deg); }
+        .gr-4 { top: 20px; left: 120px; transform: rotate(30deg); }
+        .gr-5 { top: 12px; left: 175px; transform: rotate(-10deg) scale(0.9); }
+        .gr-6 { top: 24px; left: 140px; transform: rotate(15deg) scale(0.85); }
+
+        /* 3D Jackfruit (Langka Pieces) */
+        .jackfruit-slice {
+            position: absolute;
+            width: 25px;
+            height: 15px;
+            background: radial-gradient(circle at 40% 40%, #fff3b0 0%, #ffcc00 60%, #e6b800 100%);
+            border-radius: 80% 20% 55% 40% / 70% 30% 70% 40%;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
+        }
+        .jk-1 { top: 16px; left: 12px; transform: rotate(-35deg); }
+        .jk-2 { top: 22px; left: 62px; transform: rotate(45deg) scale(1.1); }
+        .jk-3 { top: 14px; left: 95px; transform: rotate(15deg); }
+        .jk-4 { top: 20px; left: 165px; transform: rotate(-15deg); }
+        .jk-5 { top: 5px; left: 80px; transform: rotate(80deg) scale(0.9); }
+
+        /* Realistic Candle */
         .candle {
             position: absolute;
-            bottom: 110px; /* Stands right on top of the cake */
+            bottom: 120px; /* Stands on the fruit pile */
             left: 50%;
             transform: translateX(-50%);
             width: 12px;
@@ -641,7 +709,7 @@
                 #ffffff 12px
             );
             border-radius: 4px 4px 2px 2px;
-            z-index: 6;
+            z-index: 8;
             box-shadow: inset -2px 0 5px rgba(0,0,0,0.15), 0 3px 5px rgba(0,0,0,0.1);
         }
 
@@ -655,7 +723,7 @@
             height: 8px;
             background: #2b2b2b;
             border-radius: 1px;
-            z-index: 6;
+            z-index: 8;
         }
 
         /* Ultra-Realistic Candle Flame */
@@ -671,7 +739,7 @@
             box-shadow: 0 -2px 10px rgba(255, 235, 59, 0.7), 0 -5px 15px rgba(255, 87, 34, 0.5);
             animation: flameFlicker 0.6s infinite alternate ease-in-out;
             transform-origin: bottom center;
-            z-index: 7;
+            z-index: 9;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
@@ -688,7 +756,37 @@
             filter: blur(4px);
             opacity: 0;
             pointer-events: none;
-            z-index: 8;
+            z-index: 10;
+        }
+
+        /* Floating Music Controller */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            cursor: pointer;
+            font-size: 26px;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.3);
+            border: 2px solid var(--rose-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            user-select: none;
+        }
+
+        .spinning {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Flame animation */
@@ -747,54 +845,20 @@
 
         /* KEYFRAMES FOR TRANSITION (LEFT TO CENTER LANDING) */
         @keyframes flyPlane {
-            0% {
-                left: -150px;
-                top: 70%;
-                transform: translateY(-50%) rotate(15deg) scale(0.6);
-                opacity: 0;
-            }
-            15% {
-                opacity: 1;
-            }
-            70% {
-                left: 42%;
-                top: 40%;
-                transform: translateY(-50%) rotate(5deg) scale(1.1);
-                opacity: 1;
-            }
-            85% {
-                left: 55%;
-                top: 45%;
-                transform: translateY(-50%) rotate(-10deg) scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                left: 110%;
-                top: 30%;
-                transform: translateY(-50%) rotate(-25deg) scale(0.7);
-                opacity: 0;
-            }
+            0% { left: -150px; top: 70%; transform: translateY(-50%) rotate(15deg) scale(0.6); opacity: 0; }
+            15% { opacity: 1; }
+            70% { left: 42%; top: 40%; transform: translateY(-50%) rotate(5deg) scale(1.1); opacity: 1; }
+            85% { left: 55%; top: 45%; transform: translateY(-50%) rotate(-10deg) scale(1); opacity: 0.8; }
+            100% { left: 110%; top: 30%; transform: translateY(-50%) rotate(-25deg) scale(0.7); opacity: 0; }
         }
 
         @keyframes flyEnvelopeFromLeft {
-            0% {
-                transform: translateX(-120vw) rotate(-25deg) scale(0.4);
-                opacity: 0;
-            }
-            65% {
-                transform: translateX(30px) rotate(5deg) scale(1.05);
-                opacity: 1;
-            }
-            80% {
-                transform: translateX(-10px) rotate(-2deg) scale(0.98);
-            }
-            100% {
-                transform: translateX(0) rotate(0deg) scale(1);
-                opacity: 1;
-            }
+            0% { transform: translateX(-120vw) rotate(-25deg) scale(0.4); opacity: 0; }
+            65% { transform: translateX(30px) rotate(5deg) scale(1.05); opacity: 1; }
+            80% { transform: translateX(-10px) rotate(-2deg) scale(0.98); }
+            100% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
         }
 
-        /* Cute Sticker/Seal Pulse */
         @keyframes sealPulse {
             0% { transform: translateX(-50%) scale(1); }
             50% { transform: translateX(-50%) scale(1.15); filter: drop-shadow(0 8px 16px rgba(255, 77, 109, 0.6)); }
@@ -820,6 +884,9 @@
     <audio id="bg-music" loop>
         <source src="MAYBE THIS TIME   Sarah Geronimo (LYRICS)-Ronnel M.mp3" type="audio/mp3">
     </audio>
+
+    <!-- FLOATING MUSIC TOGGLE BUTTON -->
+    <div id="music-control" onclick="toggleMusic()">🔇</div>
 
     <!-- GIFT OPENING SCREEN -->
     <div id="gift-overlay">
@@ -915,7 +982,7 @@
                         <!-- YES BUTTON -->
                         <button class="choice-btn" id="btn-yes-1" onclick="goToLetter()">Yes! 💖</button>
                         <!-- NO BUTTON -->
-                        <button class="choice-btn" id="btn-no" onclick="refuseNo()">No 💔</button>
+                        <button class="choice-btn" id="btn-no">No 💔</button>
                     </div>
                 </div>
             </div>
@@ -956,7 +1023,7 @@
             <!-- STAGE 4: THE BIRTHDAY CAKE -->
             <div id="stage-cake" class="stage-element">
                 <div class="cake-screen">
-                    <h2 class="cake-text" id="cake-instruction">Blow or Click the candle to make a wish!</h2>
+                    <h2 class="cake-text" id="cake-instruction">Huypa ang mic o i-click ang kandila para maka-wish! 🎙️✨</h2>
                     
                     <!-- Highly Realistic CSS Cake & Candle -->
                     <div class="cake-wrapper" onclick="blowCandle()">
@@ -971,20 +1038,41 @@
                         <div class="cake-body">
                             <div class="cake-top"></div>
                             <div class="cream-frosting"></div>
+                            
+                            <!-- CHOCOLATE SHAVINGS LAYER ON SIDES -->
+                            <div class="cake-sides-chocolate"></div>
+                            
+                            <!-- ABUNDANT FRUIT TOPPING LAYER (PUNONG-PUNO) -->
+                            <div class="fruits-layer">
+                                <!-- Cherries (5 Pieces scattered) -->
+                                <div class="cherry-fruit ch-1"></div>
+                                <div class="cherry-fruit ch-2"></div>
+                                <div class="cherry-fruit ch-3"></div>
+                                <div class="cherry-fruit ch-4"></div>
+                                <div class="cherry-fruit ch-5"></div>
+                                
+                                <!-- Grapes (6 Pieces packed together) -->
+                                <div class="grape-fruit gr-1"></div>
+                                <div class="grape-fruit gr-2"></div>
+                                <div class="grape-fruit gr-3"></div>
+                                <div class="grape-fruit gr-4"></div>
+                                <div class="grape-fruit gr-5"></div>
+                                <div class="grape-fruit gr-6"></div>
+                                
+                                <!-- Jackfruit Slices / Langka (5 Pieces filling spaces) -->
+                                <div class="jackfruit-slice jk-1"></div>
+                                <div class="jackfruit-slice jk-2"></div>
+                                <div class="jackfruit-slice jk-3"></div>
+                                <div class="jackfruit-slice jk-4"></div>
+                                <div class="jackfruit-slice jk-5"></div>
+                            </div>
+
                             <!-- Dripping cream effects -->
                             <div class="drip drip-1"></div>
                             <div class="drip drip-2"></div>
                             <div class="drip drip-3"></div>
                             <div class="drip drip-4"></div>
                             <div class="drip drip-5"></div>
-                            <!-- Cute Sprinkles -->
-                            <div class="sprinkles">
-                                <div class="sprinkle sp-1"></div>
-                                <div class="sprinkle sp-2"></div>
-                                <div class="sprinkle sp-3"></div>
-                                <div class="sprinkle sp-4"></div>
-                                <div class="sprinkle sp-5"></div>
-                            </div>
                         </div>
                         <!-- Ceramic White Plate -->
                         <div class="plate"></div>
@@ -1003,24 +1091,43 @@ I hope you’re doing well, dae. Whatever I see of you on social media, I hope t
 Just keep being you, daee—stay humble always and stay pretty.\n
 I’m always rooting for your success in life!\n
 That’s it na, kay lain pod mag-drama ko diri, no yan mmk HAHAAHAHAHAHA.\n
-Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-From your Natnatkins💕`;
+Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-From your Natnatkins../`;
 
         let currentSlide = 0;
         const slideItems = document.querySelectorAll('.slide-card.item');
         let typewriterStarted = false;
         let isCandleBlown = false;
+        let micStream = null;
         
         const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-control');
         const bdayVideos = document.querySelectorAll('.bday-vids');
 
         slideItems.forEach((slide, idx) => {
             slide.style.display = idx === 0 ? 'flex' : 'none';
         });
 
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log(e));
+                musicBtn.innerText = "🎵";
+                musicBtn.classList.add('spinning');
+            } else {
+                bgMusic.pause();
+                musicBtn.innerText = "🔇";
+                musicBtn.classList.remove('spinning');
+            }
+        }
+
         function openSurprise() {
             document.getElementById('gift-overlay').classList.add('hidden');
             document.getElementById('main-content').classList.add('visible');
-            bgMusic.play().catch(e => console.log("Audio play delayed:", e));
+            
+            bgMusic.play().then(() => {
+                musicBtn.innerText = "🎵";
+                musicBtn.classList.add('spinning');
+            }).catch(e => console.log("Audio play delayed:", e));
+
             triggerCelebration();
             startEnviroEffects();
         }
@@ -1051,9 +1158,17 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             }
         }
 
-        function refuseNo() {
-            alert("🚫Di Pwede.");
+        const btnNo = document.getElementById('btn-no');
+        function moveNoButton() {
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 120 - 60;
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
         }
+        btnNo.addEventListener('mouseover', moveNoButton);
+        btnNo.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
 
         function switchStage(fromId, toId) {
             document.getElementById(fromId).classList.remove('active');
@@ -1062,7 +1177,6 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
 
         function goToLetter() {
             switchStage('stage-decision', 'stage-letter');
-            bgMusic.play().catch(e => console.log("Audio play delayed: ", e));
             triggerCelebration();
 
             const lock = document.getElementById('envelope-lock');
@@ -1095,7 +1209,7 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             if (textIndex < letterMessage.length) {
                 document.getElementById("typewriter-text").innerHTML += letterMessage.charAt(textIndex);
                 textIndex++;
-                setTimeout(startTypewriter, 40); 
+                setTimeout(startTypewriter, 30); 
             } else {
                 document.getElementById('done-btn').style.display = 'block';
             }
@@ -1106,6 +1220,7 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             document.getElementById('stage-letter').classList.remove('active');
             document.getElementById('stage-cake').classList.add('active');
             triggerCelebration();
+            enableMicBlow(); 
         }
 
         function triggerCelebration() {
@@ -1121,21 +1236,55 @@ Happy birthday again i blow ang cake ha ging kawat ko rabaya nas messenger,\n-Fr
             const smoke = document.getElementById('candle-smoke');
             const instruction = document.getElementById('cake-instruction');
 
-            // 1. Patayin ang apoy ng kandila (Fade out & Shrink)
             flame.style.opacity = '0';
             flame.style.transform = 'translateX(-50%) scale(0)';
-            
-            // 2. Paratingin ang usok na parang totoo
             smoke.style.animation = 'riseSmoke 2.2s forwards ease-out';
 
-            // 3. Palitan ang mensahe sa itaas
             instruction.innerText = "✨ Your wish is granted! Happy Birthday! ✨";
 
-            // 4. Pasabugin ang makulay na confetti para sa selebrasyon
             triggerCelebration();
             setTimeout(triggerCelebration, 400);
 
             isCandleBlown = true;
+
+            if (micStream) {
+                micStream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        function enableMicBlow() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                micStream = stream;
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioContext.createAnalyser();
+                const microphone = audioContext.createMediaStreamSource(stream);
+                const javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+                analyser.smoothingTimeConstant = 0.4;
+                analyser.fftSize = 512;
+
+                microphone.connect(analyser);
+                analyser.connect(javascriptNode);
+                javascriptNode.connect(audioContext.destination);
+
+                javascriptNode.onaudioprocess = () => {
+                    if (isCandleBlown) return;
+                    const array = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(array);
+                    let values = 0;
+
+                    for (let i = 0; i < array.length; i++) {
+                        values += array[i];
+                    }
+                    let average = values / array.length;
+                    
+                    if (average > 45) {
+                        blowCandle();
+                    }
+                };
+            })
+            .catch(err => console.log("Microphone recognition bypassed or disabled: ", err));
         }
 
         function startEnviroEffects() {
