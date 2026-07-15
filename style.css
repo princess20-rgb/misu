@@ -1,0 +1,770 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(180deg,#ffeaf4,#ffd6e8,#fff5fb);
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+    color:#ff4d88;
+
+}
+
+/* ===========================
+   INTRO
+=========================== */
+
+#intro{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:linear-gradient(135deg,#ffd8ec,#ffeff8);
+
+    z-index:9999;
+
+}
+
+#intro h1{
+
+    font-family:'Pacifico',cursive;
+
+    font-size:3rem;
+
+    margin-top:20px;
+
+}
+
+#intro p{
+
+    color:#777;
+
+    margin:15px;
+
+}
+
+#openGift{
+
+    padding:18px 40px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#ff69b4;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    transition:.3s;
+
+}
+
+#openGift:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:0 0 25px #ff69b4;
+
+}
+
+.gift{
+
+    font-size:120px;
+
+    animation:bounce 1.5s infinite;
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+}
+
+/* ===========================
+   MAIN
+=========================== */
+
+#main{
+
+display:none;
+
+padding:60px 20px;
+
+text-align:center;
+
+}
+
+.title{
+
+font-family:'Pacifico',cursive;
+
+font-size:55px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+font-size:20px;
+
+color:#888;
+
+margin-bottom:50px;
+
+}
+
+/* ===========================
+   PHOTO GALLERY
+=========================== */
+
+.gallery{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:40px;
+
+justify-items:center;
+
+max-width:1100px;
+
+margin:auto;
+
+margin-bottom:70px;
+
+}
+
+/* POLAROID */
+
+.photo{
+
+background:white;
+
+padding:12px;
+
+border-radius:15px;
+
+box-shadow:0 12px 25px rgba(255,105,180,.25);
+
+width:230px;
+
+transition:.5s;
+
+position:relative;
+
+animation:float 5s ease-in-out infinite;
+
+}
+
+.photo:hover{
+
+transform:scale(1.08) rotate(0deg);
+
+}
+
+.photo img{
+
+width:100%;
+
+height:250px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+}
+
+/* Cute Tape */
+
+.photo::before{
+
+content:"";
+
+position:absolute;
+
+top:-12px;
+
+left:50%;
+
+transform:translateX(-50%) rotate(-5deg);
+
+width:70px;
+
+height:24px;
+
+background:rgba(255,255,255,.8);
+
+border-radius:5px;
+
+}
+
+/* Different Rotation */
+
+.p1{
+
+transform:rotate(-6deg);
+
+}
+
+.p2{
+
+transform:rotate(4deg);
+
+}
+
+.p3{
+
+transform:rotate(-3deg);
+
+}
+
+.p4{
+
+transform:rotate(5deg);
+
+}
+
+.p5{
+
+transform:rotate(-5deg);
+
+}
+
+.p6{
+
+transform:rotate(3deg);
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   ENVELOPE
+=========================== */
+
+.envelope{
+
+margin-top:40px;
+
+}
+
+.envelope-body{
+
+font-size:90px;
+
+animation:pulse 2s infinite;
+
+}
+
+#openLetter{
+
+margin-top:15px;
+
+padding:15px 35px;
+
+border:none;
+
+border-radius:40px;
+
+background:#ff69b4;
+
+color:white;
+
+cursor:pointer;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+#openLetter:hover{
+
+transform:scale(1.08);
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* ===========================
+   LETTER
+=========================== */
+
+#letter{
+
+display:none;
+
+margin:auto;
+
+margin-top:50px;
+
+background:white;
+
+max-width:850px;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:0 10px 30px rgba(255,105,180,.2);
+
+}
+
+#letter h2{
+
+font-family:'Pacifico',cursive;
+
+margin-bottom:25px;
+
+}
+
+#typing{
+
+line-height:2;
+
+font-size:18px;
+
+color:#555;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+margin-top:70px;
+
+color:#888;
+
+padding-bottom:40px;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.gallery{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.gallery{
+
+grid-template-columns:1fr;
+
+}
+
+.title{
+
+font-size:38px;
+
+}
+
+.photo{
+
+width:90%;
+
+}
+
+}
+
+/* ==========================================
+   🌸 FLOATING HEARTS
+========================================== */
+
+#hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:#ff7fb5;
+    font-size:25px;
+    animation:hearts 10s linear infinite;
+    opacity:.8;
+}
+
+@keyframes hearts{
+
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+/* ==========================================
+   🌸 FALLING SAKURA
+========================================== */
+
+#petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.petal{
+    position:absolute;
+    top:-50px;
+    color:#ffb6d9;
+    font-size:22px;
+    animation:petals 12s linear infinite;
+}
+
+@keyframes petals{
+
+0%{
+
+transform:translateY(-10vh) rotate(0deg);
+
+}
+
+100%{
+
+transform:
+translateY(120vh)
+translateX(120px)
+rotate(720deg);
+
+}
+
+}
+
+/* ==========================================
+   ✨ SPARKLES
+========================================== */
+
+#sparkles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.sparkle{
+
+position:absolute;
+
+width:6px;
+
+height:6px;
+
+background:white;
+
+border-radius:50%;
+
+box-shadow:0 0 12px white;
+
+animation:sparkle 2s infinite;
+
+}
+
+@keyframes sparkle{
+
+0%,100%{
+
+transform:scale(.3);
+
+opacity:.3;
+
+}
+
+50%{
+
+transform:scale(1.4);
+
+opacity:1;
+
+}
+
+}
+
+/* ==========================================
+   🌈 BACKGROUND GLOW
+========================================== */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:500px;
+
+height:500px;
+
+background:#ffd1e8;
+
+filter:blur(140px);
+
+top:-150px;
+
+left:-150px;
+
+opacity:.45;
+
+z-index:-2;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:500px;
+
+height:500px;
+
+background:#ffc2dd;
+
+filter:blur(140px);
+
+bottom:-150px;
+
+right:-150px;
+
+opacity:.45;
+
+z-index:-2;
+
+}
+
+/* ==========================================
+   🎀 FLOATING BALLOONS
+========================================== */
+
+.balloon{
+
+position:fixed;
+
+font-size:55px;
+
+animation:balloon 15s linear infinite;
+
+opacity:.55;
+
+z-index:-1;
+
+}
+
+@keyframes balloon{
+
+0%{
+
+transform:translateY(120vh);
+
+}
+
+100%{
+
+transform:translateY(-150vh);
+
+}
+
+}
+
+/* ==========================================
+   ☁️ CLOUDS
+========================================== */
+
+.cloud{
+
+position:fixed;
+
+font-size:80px;
+
+opacity:.25;
+
+animation:cloud 40s linear infinite;
+
+z-index:-2;
+
+}
+
+@keyframes cloud{
+
+0%{
+
+left:-200px;
+
+}
+
+100%{
+
+left:120%;
+
+}
+
+}
+
+/* ==========================================
+   🎀 DECORATIONS
+========================================== */
+
+.photo::after{
+
+content:"🎀";
+
+position:absolute;
+
+top:-18px;
+
+right:-12px;
+
+font-size:30px;
+
+}
+
+.title{
+
+text-shadow:
+
+0 0 10px pink,
+
+0 0 20px #ff8cc8;
+
+}
+
+#letter{
+
+backdrop-filter:blur(8px);
+
+background:rgba(255,255,255,.92);
+
+}
+
+/* ==========================================
+   HOVER EFFECTS
+========================================== */
+
+.photo:hover{
+
+box-shadow:
+
+0 0 20px pink,
+
+0 0 40px #ff99cc;
+
+}
+
+#openGift:hover,
+#openLetter:hover{
+
+box-shadow:
+
+0 0 20px #ff69b4,
+
+0 0 50px #ff69b4;
+
+}
